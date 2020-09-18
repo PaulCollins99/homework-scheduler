@@ -26,7 +26,7 @@ function exportAsJson(t) {
 
 function downloadJSON() {
   var text = JSON.stringify(timeTable.toJsonObj(), null, 2);
-  var filename = "schedule.json";
+  var filename = "Scheduler.json";
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
   element.setAttribute('download', filename);
