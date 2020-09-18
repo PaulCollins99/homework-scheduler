@@ -1,6 +1,5 @@
 var lastTask;
 var lastTT;
-let test;
 let importJSON = false
 let input
 
@@ -57,7 +56,7 @@ function importJson() {
   timeTable.unbindTasks();
   timeTable.fromJsonObj(JSON.parse(input))
   for (let i=0; i<timeTable.tasks.length; i++) {
-    timeTable.tasks[i].range.$el.addClass(timeTable.tasks[i].info.unpaid_minutes.get().toLowerCase())
+    timeTable.tasks[i].range.$el.addClass(timeTable.tasks[i].info.event_type.get().toLowerCase())
   }
   importJSON = false
 }
@@ -74,7 +73,7 @@ $('#create-form-1').submit(function (e) {
   timeTable.addTask(params);
 
   for (let i=0; i<timeTable.tasks.length; i++) {
-    timeTable.tasks[i].range.$el.addClass(timeTable.tasks[i].info.unpaid_minutes.get().toLowerCase())
+    timeTable.tasks[i].range.$el.addClass(timeTable.tasks[i].info.event_type.get().toLowerCase())
   }
   
   importJSON = false
@@ -92,8 +91,7 @@ function changeHandler () {
     } else if (arr.includes("interview")) {
       timeTable.tasks[i].range.$el.removeClass("interview")
     }
-    timeTable.tasks[i].range.$el.addClass(timeTable.tasks[i].info.unpaid_minutes.get().toLowerCase())
-    //console.log(timeTable.tasks[i].range.$el[0].classList.includes())
+    timeTable.tasks[i].range.$el.addClass(timeTable.tasks[i].info.event_type.get().toLowerCase())
   }
 }
 

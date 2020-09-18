@@ -21,27 +21,24 @@
             <h4 class="formTitle">Add task form</h4>
             <div>
                 <div class="form-group">
-                    <label for="work_start">Start Time</label>
-                    <input type="time" name="work_start" data-tt-model="work_start" placeholder="HH:mm ex) 19:30">
+                    <label for="start_time">Start Time</label>
+                    <input type="time" name="start_time" data-tt-model="start_time" placeholder="HH:mm ex) 19:30">
                 </div>
                 <div class="form-group">
-                    <label for="work_end">End  Time            </label>
-                    <input type="time" name="work_end" data-tt-model="work_end" placeholder="HH:mm ex) 20:30">
+                    <label for="end_time">End  Time            </label>
+                    <input type="time" name="end_time" data-tt-model="end_time" placeholder="HH:mm ex) 20:30">
                 </div>
             </div>
             <div>
                 <div class="form-group">
-                    <!--<label for="unpaid_minutes">Event Type</label>-->
-                    <input name="unpaid_minutes" data-tt-model="unpaid_minutes"
+                    <input name="event_type" data-tt-model="event_type"
                         placeholder="Meeting, Interview or None">
                 </div>
                 <div class="form-group">
-                    <!--<label for="unpaid_minutes">Event Type</label>-->
-                    <input type="text" name="job_name" data-tt-model="job_name" placeholder="Event ID">
+                    <input type="text" name="event_id" data-tt-model="event_id" placeholder="Event ID">
                 </div>
                 <div class="form-group">
-                    <!--<label for="unpaid_minutes">Event Type</label>-->
-                    <input type="text" name="job_id" data-tt-model="job_id" placeholder="Description">
+                    <input type="text" name="event_desc" data-tt-model="event_desc" placeholder="Description">
                 </div>
             </div>
             <button type="submit" class="btn btn-default" class="btn btn-primary">Create</button>
@@ -50,27 +47,24 @@
             <h4 class="formTitle">Editing form</h4>
             <div>
                 <div class="form-group">
-                    <label for="work_start">Start Time</label>
-                    <input type="time" name="work_start" data-tt-model="work_start" placeholder="HH:mm  ex) 19:30">
+                    <label for="start_time">Start Time</label>
+                    <input type="time" name="start_time" data-tt-model="start_time" placeholder="HH:mm  ex) 19:30">
                 </div>
                 <div class="form-group">
-                    <label for="work_end">End Time</label>
-                    <input type="time" name="work_end" data-tt-model="work_end" placeholder="HH:mm ex) 20:30">
+                    <label for="end_time">End Time</label>
+                    <input type="time" name="end_time" data-tt-model="end_time" placeholder="HH:mm ex) 20:30">
                 </div>
             </div>
             <div>
                 <div class="form-group">
-                    <!--<label for="unpaid_minutes">Event Type</label>-->
-                    <input name="unpaid_minutes" data-tt-model="unpaid_minutes"
+                    <input name="event_type" data-tt-model="event_type"
                         placeholder="Meeting, Interview or None">
                 </div>
                 <div class="form-group">
-                    <!--<label for="job_name">Event ID</label>-->
-                    <input type="text" name="job_name" data-tt-model="job_name" placeholder="Event ID">
+                    <input type="text" name="event_id" data-tt-model="event_id" placeholder="Event ID">
                 </div>
                 <div class="form-group">
-                    <!--<label for="job_id">Description</label>-->
-                    <input type="text" name="job_id" data-tt-model="job_id" placeholder="Description">
+                    <input type="text" name="event_desc" data-tt-model="event_desc" placeholder="Description">
                 </div>
             </div>
             <button class="btn btn-danger delete-task" data-tt-model="deleteButton">Delete Task</button>

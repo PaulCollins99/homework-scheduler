@@ -830,26 +830,26 @@
                 }
                 var Task = Base.extend({
                         initialize: function (params) {
-                            var work_start_val = parseTimeStr(params.work_start);
-                            var work_end_val = parseTimeStr(params.work_end);
+                            var start_time_val = parseTimeStr(params.start_time);
+                            var end_time_val = parseTimeStr(params.end_time);
                             this.timeRange = {
-                                work_start: new SimpleReactiveVar(work_start_val),
-                                work_end: new SimpleReactiveVar(work_end_val)
+                                start_time: new SimpleReactiveVar(start_time_val),
+                                end_time: new SimpleReactiveVar(end_time_val)
                             };
                             var self = this;
-                            this.timeRange.work_start.setValidation(function (newVal) {
+                            this.timeRange.start_time.setValidation(function (newVal) {
                                 var timeRange = {
-                                        work_start: newVal,
-                                        work_end: self.timeRange.work_end.get()
+                                        start_time: newVal,
+                                        end_time: self.timeRange.end_time.get()
                                     };
                                 return TimeRangeValidator.validate(timeRange, self.tasks.filter(function (t) {
                                     return t !== self;
                                 }));
                             });
-                            this.timeRange.work_end.setValidation(function (newVal) {
+                            this.timeRange.end_time.setValidation(function (newVal) {
                                 var timeRange = {
-                                        work_start: self.timeRange.work_start.get(),
-                                        work_end: newVal
+                                        start_time: self.timeRange.start_time.get(),
+                                        end_time: newVal
                                     };
                                 return TimeRangeValidator.validate(timeRange, self.tasks.filter(function (t) {
                                     return t !== self;
@@ -857,8 +857,8 @@
                             });
                             this.info = {
                                 unpaid_minutes: new SimpleReactiveVar(params.unpaid_minutes),
-                                job_name: new SimpleReactiveVar(params.job_name),
-                                job_id: new SimpleReactiveVar(params.job_id),
+                                event_id: new SimpleReactiveVar(params.event_id),
+                                event_desc: new SimpleReactiveVar(params.event_desc),
                                 timecard_id: new SimpleReactiveVar(params.timecard_id)
                             };
                             this.tasks = params.tasks;
@@ -873,27 +873,27 @@
                         },
                         toJsonObj: function () {
                             return {
-                                work_start: this.timeRange.work_start.get(),
-                                work_end: this.timeRange.work_end.get(),
+                                start_time: this.timeRange.start_time.get(),
+                                end_time: this.timeRange.end_time.get(),
                                 unpaid_minutes: this.info.unpaid_minutes.get(),
-                                job_name: this.info.job_name.get(),
-                                job_id: this.info.job_id.get(),
+                                event_id: this.info.event_id.get(),
+                                event_desc: this.info.event_desc.get(),
                                 timecard_id: this.info.timecard_id.get()
                             };
                         },
                         fromJsonObj: function (jsonObj) {
-                            this.timeRange.work_start.set(jsonObj.work_start);
-                            this.timeRange.work_end.set(jsonObj.work_end);
+                            this.timeRange.start_time.set(jsonObj.start_time);
+                            this.timeRange.end_time.set(jsonObj.end_time);
                             this.info.unpaid_minutes.set(jsonObj.unpaid_minutes);
-                            this.info.job_name.set(jsonObj.job_name);
-                            this.info.job_id.set(jsonObj.job_id);
+                            this.info.event_id.set(jsonObj.event_id);
+                            this.info.event_desc.set(jsonObj.event_desc);
                             this.info.timecard_id.set(jsonObj.timecard_id);
                         }
                     });
                 Task.createTask = function (params) {
                     var timeRange = {
-                            work_start: moment(params.work_start, 'HH:mm'),
-                            work_end: moment(params.work_end, 'HH:mm')
+                            start_time: moment(params.start_time, 'HH:mm'),
+                            end_time: moment(params.end_time, 'HH:mm')
                         };
                     var vResult = TimeRangeValidator.validate(timeRange, params.tasks);
                     if (vResult === true)
@@ -912,26 +912,26 @@
             function (_dereq_, module, exports) {
                 var TimeRangeValidator = {
                         validate: function (newTimeRange, tasks) {
-                            if (newTimeRange.work_start.toString() === 'Invalid date' || newTimeRange.work_end.toString() === 'Invalid date')
+                            if (newTimeRange.start_time.toString() === 'Invalid date' || newTimeRange.end_time.toString() === 'Invalid date')
                                 return new this.ValidationError(this.ValidationError.TYPES.INVALIDATE, newTimeRange);
-                            if (newTimeRange.work_start.toString() === newTimeRange.work_end.toString())
+                            if (newTimeRange.start_time.toString() === newTimeRange.end_time.toString())
                                 return new this.ValidationError(this.ERROR_TYPES.DUPLICATED, newTimeRange);
-                            if (newTimeRange.work_start > newTimeRange.work_end)
+                            if (newTimeRange.start_time > newTimeRange.end_time)
                                 return new this.ValidationError(this.ERROR_TYPES.LATER_START, newTimeRange);
                             var timeRange;
                             for (var i in tasks) {
                                 timeRange = tasks[i].timeRange;
                                 var trKeys = [
-                                        'work_start',
-                                        'work_end'
+                                        'start_time',
+                                        'end_time'
                                     ];
                                 for (var j in trKeys) {
                                     var trKey = trKeys[j];
-                                    if (timeRange.work_start.get() < newTimeRange[trKey] && timeRange.work_end.get() > newTimeRange[trKey] || newTimeRange.work_start < timeRange[trKey].get() && newTimeRange.work_end > timeRange[trKey].get()) {
+                                    if (timeRange.start_time.get() < newTimeRange[trKey] && timeRange.end_time.get() > newTimeRange[trKey] || newTimeRange.start_time < timeRange[trKey].get() && newTimeRange.end_time > timeRange[trKey].get()) {
                                         return new this.ValidationError(this.ERROR_TYPES.FOLDED, newTimeRange);
                                     }
                                 }
-                                if (timeRange.work_start.get().isSame(newTimeRange.work_start) && timeRange.work_end.get().isSame(newTimeRange.work_end)) {
+                                if (timeRange.start_time.get().isSame(newTimeRange.start_time) && timeRange.end_time.get().isSame(newTimeRange.end_time)) {
                                     return new this.ValidationError(this.ERROR_TYPES.DUPLICATED, newTimeRange);
                                 }
                             }
@@ -1016,10 +1016,10 @@
                                 ev.stopPropagation();
                                 ev.preventDefault();
                                 var task = self.findTaskByRange(rangeObj);
-                                var work_start_val = self.rangeValToMoment(rangeObj.range[0]);
-                                var work_end_val = self.rangeValToMoment(rangeObj.range[1]);
-                                task.timeRange.work_start.setWithoutCallback(work_start_val);
-                                task.timeRange.work_end.setWithoutCallback(work_end_val);
+                                var start_time_val = self.rangeValToMoment(rangeObj.range[0]);
+                                var end_time_val = self.rangeValToMoment(rangeObj.range[1]);
+                                task.timeRange.start_time.setWithoutCallback(start_time_val);
+                                task.timeRange.end_time.setWithoutCallback(end_time_val);
                             });
                             this.rangeBar.on('selecttime', function (ev, startTime) {
                                 ev.stopPropagation();
@@ -1038,13 +1038,13 @@
                             var self = this;
                             var onTimeChange = function () {
                                 var rangeNum = [
-                                        self.rangeBar.abnormalise(task.timeRange.work_start.get()),
-                                        self.rangeBar.abnormalise(task.timeRange.work_end.get())
+                                        self.rangeBar.abnormalise(task.timeRange.start_time.get()),
+                                        self.rangeBar.abnormalise(task.timeRange.end_time.get())
                                     ];
                                 task.range.val(rangeNum);
                             };
-                            task.timeRange.work_start.onChange(onTimeChange);
-                            task.timeRange.work_end.onChange(onTimeChange);
+                            task.timeRange.start_time.onChange(onTimeChange);
+                            task.timeRange.end_time.onChange(onTimeChange);
                         },
                         addTask: function (params) {
                             params.tasks = this.tasks;
@@ -1052,8 +1052,8 @@
                             if (task.isErrorObj)
                                 return task;
                             var rangeVal = [
-                                    this.rangeBar.abnormalise(task.timeRange.work_start.get()),
-                                    this.rangeBar.abnormalise(task.timeRange.work_end.get())
+                                    this.rangeBar.abnormalise(task.timeRange.start_time.get()),
+                                    this.rangeBar.abnormalise(task.timeRange.end_time.get())
                                 ];
                             task.range = this.rangeBar.addRange(rangeVal);
                             this.$el.trigger('addtask', [
@@ -1064,11 +1064,11 @@
                         },
                         addTaskFromRange: function (range) {
                             var params = {
-                                    work_start: this.rangeBar.normalise(range.range[0]),
-                                    work_end: this.rangeBar.normalise(range.range[1]),
+                                    start_time: this.rangeBar.normalise(range.range[0]),
+                                    end_time: this.rangeBar.normalise(range.range[1]),
                                     unpaid_minutes: '',
-                                    job_name: '',
-                                    job_id: '',
+                                    event_id: '',
+                                    event_desc: '',
                                     timecard_id: '',
                                     tasks: this.tasks
                                 };
@@ -1160,7 +1160,7 @@
                             return moment(this.rangeBar.normalise(rangeVal), TIME_FORMAT);
                         },
                         removeTask: function (task) {
-                            var jobId = task.info.job_id.get();
+                            var jobId = task.info.event_desc.get();
                             this.unbindTaskForm(task);
                             this.rangeBar.removeRange(task.range);
                             task.remove();
@@ -1188,8 +1188,8 @@
                         fromJsonObj: function (jsonObj) {
                             for (var i in jsonObj.tasks) {
                                 var t = jsonObj.tasks[i];
-                                t.work_start = moment(t.work_start).format('HH:mm');
-                                t.work_end = moment(t.work_end).format('HH:mm');
+                                t.start_time = moment(t.start_time).format('HH:mm');
+                                t.end_time = moment(t.end_time).format('HH:mm');
                                 this.addTask(t);
                             }
                         }
