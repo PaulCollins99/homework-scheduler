@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="./lib/external/moment.min.js"></script>
+    <script src="./lib/external/jquery.min.js"></script>
+    <script src="./lib/external/index.js"></script>
+    <script src="./lib/external/bootstrap.min.js"></script>
+    <script src="./dist/timetable.min.js?timestamp=1"></script>
+    <link rel="stylesheet" type="text/css" href="./elessar.css">
+</head>
+
+<body>
+    <section class="titleBarBox">
+        <h1>Homework Scheduler</h1>
+    </section>
+    <div id="sliders"></div>
+    <section class="container">
+        <form id="create-form-1" class="inputForm">
+            <h4 class="formTitle">Add task form</h4>
+            <div>
+                <div class="form-group">
+                    <label for="work_start">Start Time</label>
+                    <input type="time" name="work_start" data-tt-model="work_start" placeholder="HH:mm ex) 19:30">
+                </div>
+                <div class="form-group">
+                    <label for="work_end">End Time</label>
+                    <input type="time" name="work_end" data-tt-model="work_end" placeholder="HH:mm ex) 20:30">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="unpaid_minutes">Event Type</label>
+                    <input name="unpaid_minutes" data-tt-model="unpaid_minutes"
+                        placeholder="Meeting, Interview or None">
+                </div>
+                <div class="form-group">
+                    <label for="job_name">Event ID</label>
+                    <input type="text" name="job_name" data-tt-model="job_name">
+                </div>
+                <div class="form-group">
+                    <label for="job_id">Description</label>
+                    <input type="text" name="job_id" data-tt-model="job_id">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default" class="btn btn-primary">Create</button>
+        </form>
+        <form id="edit-form" class="inputForm">
+            <h4 class="formTitle">Editing form</h4>
+            <div>
+                <div class="form-group">
+                    <label for="work_start">Start Time</label>
+                    <input type="time" name="work_start" data-tt-model="work_start" placeholder="HH:mm  ex) 19:30">
+                </div>
+                <div class="form-group">
+                    <label for="work_end">End Time</label>
+                    <input type="time" name="work_end" data-tt-model="work_end" placeholder="HH:mm ex) 20:30">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="unpaid_minutes">Event Type</label>
+                    <input name="unpaid_minutes" data-tt-model="unpaid_minutes"
+                        placeholder="Meeting, Interview or None">
+                </div>
+                <div class="form-group">
+                    <label for="job_name">Event ID</label>
+                    <input type="text" name="job_name" data-tt-model="job_name">
+                </div>
+                <div class="form-group">
+                    <label for="job_id">Description</label>
+                    <input type="text" name="job_id" data-tt-model="job_id">
+                </div>
+            </div>
+            <button class="btn btn-danger delete-task" data-tt-model="deleteButton">delete</button>
+        </form>
+        <section class="inputForm">
+                <button id="downloadJSONBtn">Download Json</button>
+                <input type="file" id="fileToImport">
+                <button type="button" id="importBtn">Import</button>
+        </section>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>

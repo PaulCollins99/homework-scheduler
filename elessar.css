@@ -1,0 +1,298 @@
+body {
+  display: grid;
+  grid-template-rows: 1fr 1fr 5fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "titleBar titleBar"
+    "timeBar timeBar"
+    "control control";
+
+  height: 87vh;
+  padding-left: 10em;
+  padding-right: 10em;
+  padding-top: 3.5em;
+  padding-bottom: 4em;
+  margin: 0px;
+
+  background: rgb(93, 153, 214);
+  background: linear-gradient(340deg, rgba(93, 153, 214, 1) 0%, rgba(110, 158, 207, 1) 50%, rgba(171, 201, 231, 1) 100%);
+  overflow-y: hidden;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.elessar-handle {
+  display: block;
+  background: black;
+  height: 100%;
+  width: 5px;
+  cursor: ew-resize;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.elessar-handle:first-child {
+  left: 0;
+}
+
+.elessar-handle:last-child {
+  right: 0;
+}
+
+.elessar-vertical .elessar-handle {
+  height: 5px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: auto;
+  bottom: auto;
+  cursor: ns-resize;
+}
+
+.elessar-vertical .elessar-handle:first-child {
+  top: 0;
+}
+
+.elessar-vertical .elessar-handle:last-child {
+  bottom: 0;
+}
+
+.elessar-indicator {
+  position: absolute;
+  background: black;
+  border-color: white;
+  border-style: solid;
+  border-width: 0 1px;
+  width: 2px;
+  height: 100%;
+  z-index: 15;
+}
+
+.elessar-vertical .elessar-indicator {
+  width: 100%;
+  height: 2px;
+}
+
+.elessar-range {
+  position: absolute;
+  cursor: pointer;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #CC7C80;
+  color: white;
+  width: 0;
+  z-index: 10;
+}
+
+.elessar-range.selected {
+  font-weight: bold;
+}
+
+.elessar-vertical .elessar-range {
+  width: auto;
+  height: 0;
+}
+
+.elessar-label {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  border-left: 1px solid #999;
+  padding-left: 10px;
+}
+
+.elessar-readonly {
+  opacity: 0.6;
+  cursor: default !important;
+}
+
+.elessar-phantom {
+  background-color: transparent;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer !important;
+}
+
+.elessar-rangebar {
+  position: relative;
+  height: 70px;
+  line-height: 70px;
+  background: #ccc;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 25px;
+  border: 2px solid darkgrey;
+  -webkit-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  -moz-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+}
+
+.elessar-delete-confirm {
+  background: red;
+}
+
+body.elessar-resizing,
+body.elessar-dragging {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body.elessar-resizing,
+body.elessar-resizing .bar,
+body.elessar-resizing .handle {
+  cursor: ew-resize !important;
+}
+
+body.elessar-resizing.elessar-resizing-vertical,
+body.elessar-resizing.elessar-resizing-vertical .bar,
+body.elessar-resizing.elessar-resizing-vertical .handle {
+  cursor: ns-resize !important;
+}
+
+body.elessar-dragging,
+body.elessar-dragging .bar,
+body.elessar-dragging .handle {
+  cursor: move !important;
+  cursor: -webkit-grabbing !important;
+  cursor: -moz-grabbing !important;
+  cursor: grabbing !important;
+}
+
+.meeting {
+  background-color: #88292F;
+}
+
+.interview {
+  background-color: #A27E8E;
+}
+
+#create-form-1 {
+  grid-area: addT
+}
+
+#edit-form {
+  grid-area: editT;
+}
+
+#importsAndExports {
+  grid-area: importExport;
+  -webkit-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  -moz-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  border-radius: 25px;
+  margin-bottom: 10px;
+  background-color: rgb(239, 239, 239);
+  text-align: center;
+}
+
+.inputForm {
+  background-color: white;
+  border-width: 2px;
+  border-style: solid;
+  text-align: center;
+  opacity: 0.7;
+  margin: 1em;
+  -webkit-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  -moz-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  border-radius: 25px;
+  height: 29%;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.container {
+  background-color: rgb(239, 239, 239);
+  grid-area: control;
+  -webkit-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  -moz-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  border-radius: 25px;
+  text-align: center;
+}
+
+.sliderContainer {
+  grid-area: timeBar;
+  -webkit-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  -moz-box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
+  border-radius: 25px;
+  background-color: rgb(239, 239, 239);
+  margin-bottom: 10px;
+  vertical-align: middle;
+}
+
+#sliders {
+  padding-left: 10px;
+  padding-right: 10px;
+  grid-area: timeBar;
+}
+
+button {
+  width: 15%;
+  border-radius: 25px;
+  border: 2px solid darkgrey;
+  font-size: larger;
+}
+
+input[type=file] {
+  width: 20%;
+  border-radius: 25px;
+  border: 2px solid darkgrey;
+  font-size: larger;
+  padding-left: 15px;
+}
+
+button:hover, input[type=file]:hover {
+  border: 2px solid grey;
+}
+
+.elessar-barlabel {
+  text-align: center;
+}
+
+h4 {
+  margin: 5px;
+}
+
+.holder {
+  position: relative;
+  top: 30%;
+}
+
+.titleBarBox {
+  text-align: center;
+  grid-area: titleBar;
+}
+
+h1 {
+  color: #696969;
+  border-bottom: 2px solid #646464;
+  margin-left: 40%;
+  margin-right: 40%;
+}
+
+.form-group{
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 5px;
+}
