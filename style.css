@@ -139,10 +139,6 @@ body {
   box-shadow: 4px 4px 8px -1px rgba(97, 97, 97, 1);
 }
 
-.elessar-delete-confirm {
-  background: red;
-}
-
 body.elessar-resizing,
 body.elessar-dragging {
   -webkit-touch-callout: none;
